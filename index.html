@@ -3,13 +3,16 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>ShiftFlow</title>
 
 <style>
 
-/* ===== RESET ===== */
+/* =========================
+   RESET
+========================= */
 
 *{
     margin:0;
@@ -21,49 +24,109 @@
 body{
     background:#f1f5f9;
     color:#1e293b;
+    overflow-x:hidden;
 }
 
-/* ===== LAYOUT ===== */
+/* =========================
+   MENU BUTTON
+========================= */
+
+.menu-btn{
+
+    display:none;
+
+    position:fixed;
+
+    top:15px;
+    left:15px;
+
+    width:50px;
+    height:50px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+    z-index:1001;
+
+    box-shadow:
+    0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* =========================
+   APP
+========================= */
 
 .app{
     display:flex;
     min-height:100vh;
 }
 
-/* ===== SIDEBAR ===== */
+/* =========================
+   SIDEBAR
+========================= */
 
 .sidebar{
+
     width:320px;
+
     background:#0f172a;
+
     color:white;
+
     padding:20px;
+
     overflow-y:auto;
+
+    transition:0.3s;
+
+    z-index:999;
 }
 
 .logo{
-    font-size:28px;
-    font-weight:bold;
+
     text-align:center;
-    margin-bottom:25px;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    margin-bottom:30px;
 }
 
 .form-group{
-    margin-bottom:15px;
+    margin-bottom:16px;
 }
 
 .form-group label{
+
     display:block;
+
     margin-bottom:6px;
+
     font-size:14px;
 }
 
 .sidebar input,
 .sidebar textarea,
 .sidebar button{
+
     width:100%;
+
     border:none;
-    border-radius:10px;
-    padding:12px;
+
+    border-radius:12px;
+
+    padding:14px;
+
     font-size:15px;
 }
 
@@ -73,15 +136,20 @@ body{
 }
 
 .sidebar textarea{
+
     resize:vertical;
-    min-height:80px;
+
+    min-height:90px;
 }
 
 .add-btn{
+
     background:#2563eb;
+
     color:white;
+
     cursor:pointer;
-    transition:0.2s;
+
     margin-top:10px;
 }
 
@@ -90,9 +158,13 @@ body{
 }
 
 .clear-btn{
+
     background:#dc2626;
+
     color:white;
+
     cursor:pointer;
+
     margin-top:10px;
 }
 
@@ -100,176 +172,373 @@ body{
     background:#b91c1c;
 }
 
-/* ===== MAIN ===== */
+/* =========================
+   OVERLAY
+========================= */
 
-.main{
-    flex:1;
-    padding:20px;
-    overflow-x:auto;
+.sidebar-overlay{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,0.5);
+
+    z-index:998;
 }
 
-/* ===== HEADER ===== */
+.sidebar-overlay.active{
+    display:block;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+
+    flex:1;
+
+    padding:20px;
+}
+
+/* =========================
+   HEADER
+========================= */
 
 .header{
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
+
     gap:10px;
+
     margin-bottom:20px;
-    flex-wrap:wrap;
 }
 
 .header h1{
-    font-size:30px;
+
+    font-size:32px;
 }
 
 .nav-btn{
+
     background:#2563eb;
+
     color:white;
+
     border:none;
-    border-radius:10px;
-    padding:10px 18px;
-    cursor:pointer;
+
+    border-radius:12px;
+
+    padding:12px 18px;
+
     font-size:15px;
+
+    cursor:pointer;
 }
 
 .nav-btn:hover{
     background:#1d4ed8;
 }
 
-/* ===== CALENDAR ===== */
+/* =========================
+   CALENDAR DESKTOP
+========================= */
 
 .calendar{
+
     display:grid;
+
     grid-template-columns:repeat(7,1fr);
+
     gap:10px;
-    min-width:700px;
 }
 
 .day-name{
+
     background:#dbeafe;
+
     padding:12px;
-    border-radius:10px;
+
     text-align:center;
+
+    border-radius:12px;
+
     font-weight:bold;
 }
 
 .day{
+
     background:white;
-    border-radius:12px;
-    min-height:130px;
-    padding:8px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.08);
-    display:flex;
-    flex-direction:column;
+
+    border-radius:14px;
+
+    min-height:140px;
+
+    padding:10px;
+
+    box-shadow:
+    0 2px 8px rgba(0,0,0,0.08);
 }
 
 .empty{
+
     background:transparent;
+
     box-shadow:none;
 }
 
 .day-number{
+
     font-weight:bold;
-    margin-bottom:8px;
+
+    margin-bottom:10px;
+
+    font-size:17px;
 }
 
+/* =========================
+   EVENT
+========================= */
+
 .event{
+
     background:#2563eb;
+
     color:white;
-    border-radius:8px;
-    padding:6px;
-    margin-bottom:5px;
-    font-size:13px;
+
+    border-radius:10px;
+
+    padding:10px;
+
+    margin-bottom:8px;
+
     position:relative;
+
     word-wrap:break-word;
+
+    line-height:1.4;
+}
+
+.event strong{
+
+    display:block;
+
+    margin-bottom:4px;
 }
 
 .event small{
-    display:block;
-    margin-top:4px;
+
+    font-size:13px;
 }
 
 .delete-btn{
+
     position:absolute;
-    right:6px;
+
+    right:8px;
     top:4px;
+
     cursor:pointer;
-    font-weight:bold;
+
+    font-size:18px;
 }
 
-/* ===== TABLET ===== */
+/* =========================
+   TABLET
+========================= */
 
 @media(max-width:992px){
 
-    .app{
-        flex-direction:column;
+    .menu-btn{
+        display:block;
     }
 
     .sidebar{
-        width:100%;
+
+        position:fixed;
+
+        left:-100%;
+
+        top:0;
+        bottom:0;
+
+        width:320px;
+
+        max-width:90%;
+    }
+
+    .sidebar.active{
+        left:0;
     }
 
     .main{
+
         width:100%;
+
+        padding:
+        80px 10px 20px 10px;
     }
-}
-
-/* ===== MOBILE ===== */
-
-@media(max-width:768px){
 
     .header{
-        flex-direction:column;
-        align-items:stretch;
+
+        flex-wrap:wrap;
+    }
+
+    .header h1{
+
+        width:100%;
+
         text-align:center;
     }
 
-    .header h1{
-        font-size:24px;
-    }
-
     .calendar{
-        grid-template-columns:repeat(2,1fr);
-        min-width:100%;
-    }
 
-    .day-name{
-        font-size:14px;
-        padding:10px;
-    }
-
-    .day{
-        min-height:110px;
-    }
-
-    .event{
-        font-size:12px;
+        grid-template-columns:
+        repeat(2,1fr);
     }
 }
 
-/* ===== VERY SMALL DEVICES ===== */
+/* =========================
+   SMARTPHONES
+========================= */
 
-@media(max-width:480px){
-
-    .calendar{
-        grid-template-columns:1fr;
-    }
-
-    .sidebar{
-        padding:15px;
-    }
+@media(max-width:768px){
 
     .main{
-        padding:10px;
+
+        padding:
+        80px 8px 15px 8px;
     }
 
-    .header h1{
-        font-size:20px;
+    .header{
+
+        flex-direction:column;
     }
 
     .nav-btn{
+
         width:100%;
+
+        padding:14px;
+
+        font-size:16px;
+    }
+
+    .header h1{
+
+        font-size:24px;
+    }
+
+    /* MOBILE CALENDAR */
+
+    .calendar{
+
+        display:flex;
+
+        flex-direction:column;
+
+        gap:12px;
+    }
+
+    .day-name{
+        display:none;
+    }
+
+    .empty{
+        display:none;
+    }
+
+    .day{
+
+        min-height:auto;
+
+        padding:14px;
+    }
+
+    .day-number{
+
+        font-size:18px;
+
+        padding-bottom:8px;
+
+        border-bottom:
+        1px solid #e2e8f0;
+    }
+
+    .event{
+
+        padding:12px;
+
+        font-size:14px;
+    }
+
+    .event strong{
+
+        font-size:15px;
+    }
+
+    .event small{
+
+        font-size:13px;
+    }
+
+    .sidebar{
+
+        padding:18px;
+    }
+
+    .sidebar input,
+    .sidebar textarea,
+    .sidebar button{
+
+        font-size:16px;
+    }
+}
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media(max-width:480px){
+
+    .sidebar{
+
+        width:100%;
+
+        max-width:100%;
+    }
+
+    .header h1{
+
+        font-size:21px;
+    }
+
+    .nav-btn{
+
+        font-size:15px;
+    }
+
+    .menu-btn{
+
+        width:48px;
+        height:48px;
+    }
+
+    .day{
+
+        padding:12px;
+    }
+
+    .event{
+
+        font-size:13px;
     }
 }
 
@@ -278,39 +547,87 @@ body{
 
 <body>
 
+<!-- MENU BUTTON -->
+
+<button
+class="menu-btn"
+onclick="toggleSidebar()">
+
+☰
+
+</button>
+
+<!-- OVERLAY -->
+
+<div
+class="sidebar-overlay"
+onclick="closeSidebar()">
+</div>
+
 <div class="app">
 
     <!-- SIDEBAR -->
 
-    <aside class="sidebar">
+    <aside
+    class="sidebar"
+    id="sidebar">
 
-        <div class="logo">ShiftFlow</div>
+        <div class="logo">
+            ShiftFlow
+        </div>
 
         <div class="form-group">
-            <label>Працівник</label>
-            <input type="text" id="employeeName"
+
+            <label>
+                Працівник
+            </label>
+
+            <input
+            type="text"
+            id="employeeName"
             placeholder="Введіть ім'я">
+
         </div>
 
         <div class="form-group">
-            <label>Дата перезмінки</label>
-            <input type="date" id="shiftDate">
+
+            <label>
+                Дата перезмінки
+            </label>
+
+            <input
+            type="date"
+            id="shiftDate">
+
         </div>
 
         <div class="form-group">
-            <label>Примітка</label>
-            <textarea id="note"
-            placeholder="Додаткова інформація"></textarea>
+
+            <label>
+                Примітка
+            </label>
+
+            <textarea
+            id="note"
+            placeholder="Додаткова інформація">
+            </textarea>
+
         </div>
 
-        <button class="add-btn"
+        <button
+        class="add-btn"
         onclick="addShift()">
+
             Додати
+
         </button>
 
-        <button class="clear-btn"
+        <button
+        class="clear-btn"
         onclick="clearAllData()">
-            Очистити всі дані
+
+            Очистити календар
+
         </button>
 
     </aside>
@@ -321,21 +638,30 @@ body{
 
         <div class="header">
 
-            <button class="nav-btn"
+            <button
+            class="nav-btn"
             onclick="prevMonth()">
+
                 ← Попередній
+
             </button>
 
             <h1 id="monthYear"></h1>
 
-            <button class="nav-btn"
+            <button
+            class="nav-btn"
             onclick="nextMonth()">
+
                 Наступний →
+
             </button>
 
         </div>
 
-        <div class="calendar" id="calendar"></div>
+        <div
+        class="calendar"
+        id="calendar">
+        </div>
 
     </main>
 
@@ -343,7 +669,9 @@ body{
 
 <script>
 
-/* ===== ELEMENTS ===== */
+/* =========================
+   ELEMENTS
+========================= */
 
 const calendar =
 document.getElementById("calendar");
@@ -351,25 +679,46 @@ document.getElementById("calendar");
 const monthYear =
 document.getElementById("monthYear");
 
-/* ===== DATE ===== */
+const sidebar =
+document.getElementById("sidebar");
 
-let currentDate = new Date();
+const overlay =
+document.querySelector(
+".sidebar-overlay"
+);
 
-/* ===== STORAGE ===== */
+/* =========================
+   DATE
+========================= */
+
+let currentDate =
+new Date();
+
+/* =========================
+   STORAGE
+========================= */
 
 let shifts =
-JSON.parse(localStorage.getItem("shifts"))
-|| [];
+JSON.parse(
+localStorage.getItem("shifts")
+) || [];
 
-/* ===== MONTHS ===== */
+/* =========================
+   MONTHS
+========================= */
 
 const months = [
-"Січень","Лютий","Березень","Квітень",
-"Травень","Червень","Липень","Серпень",
-"Вересень","Жовтень","Листопад","Грудень"
+
+"Січень","Лютий","Березень",
+"Квітень","Травень","Червень",
+"Липень","Серпень","Вересень",
+"Жовтень","Листопад","Грудень"
+
 ];
 
-/* ===== SAVE ===== */
+/* =========================
+   SAVE
+========================= */
 
 function saveData(){
 
@@ -379,7 +728,35 @@ function saveData(){
     );
 }
 
-/* ===== RENDER ===== */
+/* =========================
+   SIDEBAR
+========================= */
+
+function toggleSidebar(){
+
+    sidebar.classList.toggle(
+        "active"
+    );
+
+    overlay.classList.toggle(
+        "active"
+    );
+}
+
+function closeSidebar(){
+
+    sidebar.classList.remove(
+        "active"
+    );
+
+    overlay.classList.remove(
+        "active"
+    );
+}
+
+/* =========================
+   CALENDAR
+========================= */
 
 function renderCalendar(){
 
@@ -395,40 +772,63 @@ function renderCalendar(){
     `${months[month]} ${year}`;
 
     const firstDay =
-    new Date(year, month, 1).getDay();
+    new Date(year, month, 1)
+    .getDay();
 
     const daysInMonth =
-    new Date(year, month + 1, 0).getDate();
+    new Date(year, month + 1, 0)
+    .getDate();
 
     const dayNames = [
+
         "Пн","Вт","Ср",
         "Чт","Пт","Сб","Нд"
+
     ];
 
-    dayNames.forEach(day => {
+    /* DAYS */
 
-        const dayName =
-        document.createElement("div");
+    if(window.innerWidth > 768){
 
-        dayName.classList.add("day-name");
+        dayNames.forEach(day => {
 
-        dayName.textContent = day;
+            const dayName =
+            document.createElement("div");
 
-        calendar.appendChild(dayName);
-    });
+            dayName.classList.add(
+                "day-name"
+            );
+
+            dayName.textContent = day;
+
+            calendar.appendChild(dayName);
+        });
+    }
 
     let startDay =
     firstDay === 0 ? 6 : firstDay - 1;
 
-    for(let i = 0; i < startDay; i++){
+    /* EMPTY */
 
-        const empty =
-        document.createElement("div");
+    if(window.innerWidth > 768){
 
-        empty.classList.add("day", "empty");
+        for(let i = 0;
+            i < startDay;
+            i++){
 
-        calendar.appendChild(empty);
+            const empty =
+            document.createElement("div");
+
+            empty.classList.add(
+                "day",
+                "empty"
+            );
+
+            calendar.appendChild(empty);
+        }
     }
+
+    /* MONTH DAYS */
 
     for(let day = 1;
         day <= daysInMonth;
@@ -442,9 +842,15 @@ function renderCalendar(){
         const dayNumber =
         document.createElement("div");
 
-        dayNumber.classList.add("day-number");
+        dayNumber.classList.add(
+            "day-number"
+        );
 
-        dayNumber.textContent = day;
+        const fullDate =
+        `${String(day).padStart(2,'0')}.${String(month + 1).padStart(2,'0')}.${year}`;
+
+        dayNumber.textContent =
+        fullDate;
 
         dayDiv.appendChild(dayNumber);
 
@@ -455,22 +861,36 @@ function renderCalendar(){
 
         shifts.forEach((shift,index)=>{
 
-            if(shift.date === currentDayString){
+            if(
+                shift.date ===
+                currentDayString
+            ){
 
                 const event =
                 document.createElement("div");
 
-                event.classList.add("event");
+                event.classList.add(
+                    "event"
+                );
 
                 event.innerHTML = `
-                    <span class="delete-btn"
+
+                    <span
+                    class="delete-btn"
                     onclick="deleteShift(${index})">
+
                     ×
+
                     </span>
 
-                    <strong>${shift.name}</strong>
+                    <strong>
+                    ${shift.name}
+                    </strong>
 
-                    <small>${shift.note}</small>
+                    <small>
+                    ${shift.note}
+                    </small>
+
                 `;
 
                 dayDiv.appendChild(event);
@@ -481,54 +901,72 @@ function renderCalendar(){
     }
 }
 
-/* ===== ADD ===== */
+/* =========================
+   ADD
+========================= */
 
 function addShift(){
 
     const name =
-    document.getElementById("employeeName")
-    .value.trim();
+    document.getElementById(
+    "employeeName"
+    ).value.trim();
 
     const date =
-    document.getElementById("shiftDate")
-    .value;
+    document.getElementById(
+    "shiftDate"
+    ).value;
 
     const note =
-    document.getElementById("note")
-    .value.trim();
+    document.getElementById(
+    "note"
+    ).value.trim();
 
     if(name === "" || date === ""){
 
-        alert("Заповніть ім'я та дату");
+        alert(
+        "Заповніть ім'я та дату"
+        );
 
         return;
     }
 
     shifts.push({
+
         name,
         date,
         note
+
     });
 
     saveData();
 
     document.getElementById(
-    "employeeName").value = "";
+    "employeeName"
+    ).value = "";
 
     document.getElementById(
-    "shiftDate").value = "";
+    "shiftDate"
+    ).value = "";
 
     document.getElementById(
-    "note").value = "";
+    "note"
+    ).value = "";
 
     renderCalendar();
+
+    closeSidebar();
 }
 
-/* ===== DELETE ===== */
+/* =========================
+   DELETE
+========================= */
 
 function deleteShift(index){
 
-    if(confirm("Видалити запис?")){
+    if(confirm(
+    "Видалити запис?"
+    )){
 
         shifts.splice(index,1);
 
@@ -538,12 +976,15 @@ function deleteShift(index){
     }
 }
 
-/* ===== CLEAR ===== */
+/* =========================
+   CLEAR
+========================= */
 
 function clearAllData(){
 
     if(confirm(
-    "Очистити весь календар?")){
+    "Очистити всі дані?"
+    )){
 
         shifts = [];
 
@@ -553,12 +994,15 @@ function clearAllData(){
     }
 }
 
-/* ===== MONTH ===== */
+/* =========================
+   MONTH NAVIGATION
+========================= */
 
 function prevMonth(){
 
     currentDate.setMonth(
-    currentDate.getMonth() - 1);
+    currentDate.getMonth() - 1
+    );
 
     renderCalendar();
 }
@@ -566,12 +1010,24 @@ function prevMonth(){
 function nextMonth(){
 
     currentDate.setMonth(
-    currentDate.getMonth() + 1);
+    currentDate.getMonth() + 1
+    );
 
     renderCalendar();
 }
 
-/* ===== START ===== */
+/* =========================
+   AUTO RESIZE
+========================= */
+
+window.addEventListener(
+"resize",
+renderCalendar
+);
+
+/* =========================
+   START
+========================= */
 
 renderCalendar();
 
