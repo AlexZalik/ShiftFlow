@@ -6,19 +6,27 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>ShiftFlow</title>
+<title>ShiftFlow Cloud</title>
+
+<!-- =========================
+FIREBASE SDK
+========================= -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
 <style>
 
 /* =========================
-   RESET
+RESET
 ========================= */
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 body{
@@ -28,7 +36,7 @@ body{
 }
 
 /* =========================
-   MENU BUTTON
+MENU BUTTON
 ========================= */
 
 .menu-btn{
@@ -56,13 +64,10 @@ body{
     cursor:pointer;
 
     z-index:1001;
-
-    box-shadow:
-    0 2px 10px rgba(0,0,0,0.2);
 }
 
 /* =========================
-   APP
+APP
 ========================= */
 
 .app{
@@ -71,7 +76,7 @@ body{
 }
 
 /* =========================
-   SIDEBAR
+SIDEBAR
 ========================= */
 
 .sidebar{
@@ -153,10 +158,6 @@ body{
     margin-top:10px;
 }
 
-.add-btn:hover{
-    background:#1d4ed8;
-}
-
 .clear-btn{
 
     background:#dc2626;
@@ -168,12 +169,8 @@ body{
     margin-top:10px;
 }
 
-.clear-btn:hover{
-    background:#b91c1c;
-}
-
 /* =========================
-   OVERLAY
+OVERLAY
 ========================= */
 
 .sidebar-overlay{
@@ -194,7 +191,7 @@ body{
 }
 
 /* =========================
-   MAIN
+MAIN
 ========================= */
 
 .main{
@@ -205,7 +202,7 @@ body{
 }
 
 /* =========================
-   HEADER
+HEADER
 ========================= */
 
 .header{
@@ -222,7 +219,6 @@ body{
 }
 
 .header h1{
-
     font-size:32px;
 }
 
@@ -238,17 +234,11 @@ body{
 
     padding:12px 18px;
 
-    font-size:15px;
-
     cursor:pointer;
 }
 
-.nav-btn:hover{
-    background:#1d4ed8;
-}
-
 /* =========================
-   CALENDAR DESKTOP
+CALENDAR
 ========================= */
 
 .calendar{
@@ -288,9 +278,7 @@ body{
 }
 
 .empty{
-
     background:transparent;
-
     box-shadow:none;
 }
 
@@ -299,12 +287,10 @@ body{
     font-weight:bold;
 
     margin-bottom:10px;
-
-    font-size:17px;
 }
 
 /* =========================
-   EVENT
+EVENT
 ========================= */
 
 .event{
@@ -320,10 +306,6 @@ body{
     margin-bottom:8px;
 
     position:relative;
-
-    word-wrap:break-word;
-
-    line-height:1.4;
 }
 
 .event strong{
@@ -331,11 +313,6 @@ body{
     display:block;
 
     margin-bottom:4px;
-}
-
-.event small{
-
-    font-size:13px;
 }
 
 .delete-btn{
@@ -351,7 +328,7 @@ body{
 }
 
 /* =========================
-   TABLET
+TABLET
 ========================= */
 
 @media(max-width:992px){
@@ -386,6 +363,12 @@ body{
         80px 10px 20px 10px;
     }
 
+    .calendar{
+
+        grid-template-columns:
+        repeat(2,1fr);
+    }
+
     .header{
 
         flex-wrap:wrap;
@@ -397,54 +380,19 @@ body{
 
         text-align:center;
     }
-
-    .calendar{
-
-        grid-template-columns:
-        repeat(2,1fr);
-    }
 }
 
 /* =========================
-   SMARTPHONES
+SMARTPHONE
 ========================= */
 
 @media(max-width:768px){
-
-    .main{
-
-        padding:
-        80px 8px 15px 8px;
-    }
-
-    .header{
-
-        flex-direction:column;
-    }
-
-    .nav-btn{
-
-        width:100%;
-
-        padding:14px;
-
-        font-size:16px;
-    }
-
-    .header h1{
-
-        font-size:24px;
-    }
-
-    /* MOBILE CALENDAR */
 
     .calendar{
 
         display:flex;
 
         flex-direction:column;
-
-        gap:12px;
     }
 
     .day-name{
@@ -455,55 +403,21 @@ body{
         display:none;
     }
 
+    .header{
+        flex-direction:column;
+    }
+
+    .nav-btn{
+        width:100%;
+    }
+
     .day{
-
         min-height:auto;
-
-        padding:14px;
-    }
-
-    .day-number{
-
-        font-size:18px;
-
-        padding-bottom:8px;
-
-        border-bottom:
-        1px solid #e2e8f0;
-    }
-
-    .event{
-
-        padding:12px;
-
-        font-size:14px;
-    }
-
-    .event strong{
-
-        font-size:15px;
-    }
-
-    .event small{
-
-        font-size:13px;
-    }
-
-    .sidebar{
-
-        padding:18px;
-    }
-
-    .sidebar input,
-    .sidebar textarea,
-    .sidebar button{
-
-        font-size:16px;
     }
 }
 
 /* =========================
-   SMALL PHONES
+SMALL PHONE
 ========================= */
 
 @media(max-width:480px){
@@ -516,29 +430,7 @@ body{
     }
 
     .header h1{
-
-        font-size:21px;
-    }
-
-    .nav-btn{
-
-        font-size:15px;
-    }
-
-    .menu-btn{
-
-        width:48px;
-        height:48px;
-    }
-
-    .day{
-
-        padding:12px;
-    }
-
-    .event{
-
-        font-size:13px;
+        font-size:22px;
     }
 }
 
@@ -547,7 +439,9 @@ body{
 
 <body>
 
-<!-- MENU BUTTON -->
+<!-- =========================
+MENU BUTTON
+========================= -->
 
 <button
 class="menu-btn"
@@ -557,7 +451,9 @@ onclick="toggleSidebar()">
 
 </button>
 
-<!-- OVERLAY -->
+<!-- =========================
+OVERLAY
+========================= -->
 
 <div
 class="sidebar-overlay"
@@ -566,111 +462,174 @@ onclick="closeSidebar()">
 
 <div class="app">
 
-    <!-- SIDEBAR -->
+<!-- =========================
+SIDEBAR
+========================= -->
 
-    <aside
-    class="sidebar"
-    id="sidebar">
+<aside
+class="sidebar"
+id="sidebar">
 
-        <div class="logo">
-            ShiftFlow
-        </div>
+<div class="logo">
 
-        <div class="form-group">
+ShiftFlow
 
-            <label>
-                Працівник
-            </label>
+</div>
 
-            <input
-            type="text"
-            id="employeeName"
-            placeholder="Введіть ім'я">
+<div class="form-group">
 
-        </div>
+<label>
 
-        <div class="form-group">
+Працівник
 
-            <label>
-                Дата перезмінки
-            </label>
+</label>
 
-            <input
-            type="date"
-            id="shiftDate">
+<input
+type="text"
+id="employeeName"
+placeholder="Введіть ім'я">
 
-        </div>
+</div>
 
-        <div class="form-group">
+<div class="form-group">
 
-            <label>
-                Примітка
-            </label>
+<label>
 
-            <textarea
-            id="note"
-            placeholder="Додаткова інформація">
-            </textarea>
+Дата перезмінки
 
-        </div>
+</label>
 
-        <button
-        class="add-btn"
-        onclick="addShift()">
+<input
+type="date"
+id="shiftDate">
 
-            Додати
+</div>
 
-        </button>
+<div class="form-group">
 
-        <button
-        class="clear-btn"
-        onclick="clearAllData()">
+<label>
 
-            Очистити календар
+Примітка
 
-        </button>
+</label>
 
-    </aside>
+<textarea
+id="note"
+placeholder="Додаткова інформація">
+</textarea>
 
-    <!-- MAIN -->
+</div>
 
-    <main class="main">
+<button
+class="add-btn"
+onclick="addShift()">
 
-        <div class="header">
+Додати
 
-            <button
-            class="nav-btn"
-            onclick="prevMonth()">
+</button>
 
-                ← Попередній
+<button
+class="clear-btn"
+onclick="clearAllData()">
 
-            </button>
+Очистити календар
 
-            <h1 id="monthYear"></h1>
+</button>
 
-            <button
-            class="nav-btn"
-            onclick="nextMonth()">
+</aside>
 
-                Наступний →
+<!-- =========================
+MAIN
+========================= -->
 
-            </button>
+<main class="main">
 
-        </div>
+<div class="header">
 
-        <div
-        class="calendar"
-        id="calendar">
-        </div>
+<button
+class="nav-btn"
+onclick="prevMonth()">
 
-    </main>
+← Попередній
+
+</button>
+
+<h1 id="monthYear"></h1>
+
+<button
+class="nav-btn"
+onclick="nextMonth()">
+
+Наступний →
+
+</button>
+
+</div>
+
+<div
+class="calendar"
+id="calendar">
+</div>
+
+</main>
 
 </div>
 
 <script>
 
 /* =========================
-   ELEMENTS
+FIREBASE CONFIG
+========================= */
+
+/*
+====================================
+ТУТ ПОТРІБНО ВСТАВИТИ ВАШ FIREBASE
+====================================
+
+1. Створіть проект Firebase
+2. Firestore Database
+3. Скопіюйте config
+4. Вставте сюди
+*/
+
+const firebaseConfig = {
+
+    apiKey: "YOUR_API_KEY",
+
+    authDomain:
+    "YOUR_PROJECT.firebaseapp.com",
+
+    projectId:
+    "YOUR_PROJECT_ID",
+
+    storageBucket:
+    "YOUR_PROJECT.appspot.com",
+
+    messagingSenderId:
+    "123456789",
+
+    appId:
+    "YOUR_APP_ID"
+};
+
+/* =========================
+FIREBASE INIT
+========================= */
+
+/*
+====================================
+НОВА ФУНКЦІЯ:
+дані синхронізуються
+між усіма пристроями
+====================================
+*/
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.firestore();
+
+/* =========================
+ELEMENTS
 ========================= */
 
 const calendar =
@@ -688,23 +647,14 @@ document.querySelector(
 );
 
 /* =========================
-   DATE
+DATE
 ========================= */
 
 let currentDate =
 new Date();
 
 /* =========================
-   STORAGE
-========================= */
-
-let shifts =
-JSON.parse(
-localStorage.getItem("shifts")
-) || [];
-
-/* =========================
-   MONTHS
+MONTHS
 ========================= */
 
 const months = [
@@ -717,19 +667,13 @@ const months = [
 ];
 
 /* =========================
-   SAVE
+SHIFTS ARRAY
 ========================= */
 
-function saveData(){
-
-    localStorage.setItem(
-        "shifts",
-        JSON.stringify(shifts)
-    );
-}
+let shifts = [];
 
 /* =========================
-   SIDEBAR
+SIDEBAR
 ========================= */
 
 function toggleSidebar(){
@@ -755,7 +699,41 @@ function closeSidebar(){
 }
 
 /* =========================
-   CALENDAR
+REALTIME FIREBASE
+========================= */
+
+/*
+====================================
+ГОЛОВНА ЗМІНА:
+
+onSnapshot()
+
+автоматично оновлює
+дані на всіх пристроях
+в реальному часі
+====================================
+*/
+
+db.collection("shifts")
+.onSnapshot(snapshot => {
+
+    shifts = [];
+
+    snapshot.forEach(doc => {
+
+        shifts.push({
+
+            id: doc.id,
+
+            ...doc.data()
+        });
+    });
+
+    renderCalendar();
+});
+
+/* =========================
+CALENDAR
 ========================= */
 
 function renderCalendar(){
@@ -786,8 +764,6 @@ function renderCalendar(){
 
     ];
 
-    /* DAYS */
-
     if(window.innerWidth > 768){
 
         dayNames.forEach(day => {
@@ -808,8 +784,6 @@ function renderCalendar(){
     let startDay =
     firstDay === 0 ? 6 : firstDay - 1;
 
-    /* EMPTY */
-
     if(window.innerWidth > 768){
 
         for(let i = 0;
@@ -827,8 +801,6 @@ function renderCalendar(){
             calendar.appendChild(empty);
         }
     }
-
-    /* MONTH DAYS */
 
     for(let day = 1;
         day <= daysInMonth;
@@ -859,7 +831,7 @@ function renderCalendar(){
         .padStart(2,'0')}-${String(day)
         .padStart(2,'0')}`;
 
-        shifts.forEach((shift,index)=>{
+        shifts.forEach(shift => {
 
             if(
                 shift.date ===
@@ -875,21 +847,21 @@ function renderCalendar(){
 
                 event.innerHTML = `
 
-                    <span
-                    class="delete-btn"
-                    onclick="deleteShift(${index})">
+                <span
+                class="delete-btn"
+                onclick="deleteShift('${shift.id}')">
 
-                    ×
+                ×
 
-                    </span>
+                </span>
 
-                    <strong>
-                    ${shift.name}
-                    </strong>
+                <strong>
+                ${shift.name}
+                </strong>
 
-                    <small>
-                    ${shift.note}
-                    </small>
+                <small>
+                ${shift.note}
+                </small>
 
                 `;
 
@@ -902,8 +874,17 @@ function renderCalendar(){
 }
 
 /* =========================
-   ADD
+ADD SHIFT
 ========================= */
+
+/*
+====================================
+НОВА ФУНКЦІЯ:
+
+дані зберігаються
+в Firebase Cloud
+====================================
+*/
 
 function addShift(){
 
@@ -931,15 +912,16 @@ function addShift(){
         return;
     }
 
-    shifts.push({
+    db.collection("shifts").add({
 
         name,
         date,
-        note
-
+        note,
+        created:
+        firebase.firestore
+        .FieldValue
+        .serverTimestamp()
     });
-
-    saveData();
 
     document.getElementById(
     "employeeName"
@@ -953,49 +935,61 @@ function addShift(){
     "note"
     ).value = "";
 
-    renderCalendar();
-
     closeSidebar();
 }
 
 /* =========================
-   DELETE
+DELETE SHIFT
 ========================= */
 
-function deleteShift(index){
+/*
+====================================
+ВИДАЛЕННЯ З FIREBASE
+====================================
+*/
+
+function deleteShift(id){
 
     if(confirm(
     "Видалити запис?"
     )){
 
-        shifts.splice(index,1);
-
-        saveData();
-
-        renderCalendar();
+        db.collection("shifts")
+        .doc(id)
+        .delete();
     }
 }
 
 /* =========================
-   CLEAR
+CLEAR ALL
 ========================= */
 
-function clearAllData(){
+/*
+====================================
+ОЧИСТКА FIREBASE
+====================================
+*/
+
+async function clearAllData(){
 
     if(confirm(
     "Очистити всі дані?"
     )){
 
-        shifts = [];
+        const snapshot =
+        await db.collection(
+        "shifts"
+        ).get();
 
-        saveData();
+        snapshot.forEach(doc => {
 
-        renderCalendar();
+            doc.ref.delete();
+        });
     }
 }
 
 /* =========================
-   MONTH NAVIGATION
+MONTH NAVIGATION
 ========================= */
 
 function prevMonth(){
@@ -1017,7 +1011,7 @@ function nextMonth(){
 }
 
 /* =========================
-   AUTO RESIZE
+AUTO RESIZE
 ========================= */
 
 window.addEventListener(
@@ -1026,7 +1020,7 @@ renderCalendar
 );
 
 /* =========================
-   START
+START
 ========================= */
 
 renderCalendar();
